@@ -3,7 +3,7 @@ package agh.ics.oop;
 public enum MapDirection {
     NORTH("Polnoc"),
     SOUTH("Poludnie"),
-    EAST("Wschood"),
+    EAST("Wschod"),
     WEST("Zachod");
     private final String directionPol;
     MapDirection(String directionPol) {
