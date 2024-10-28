@@ -1,13 +1,16 @@
 package agh.ics.oop.model;
 
 public enum MapDirection {
-    NORTH("Polnoc"),
-    SOUTH("Poludnie"),
-    EAST("Wschod"),
-    WEST("Zachod");
+    NORTH("Polnoc", new Vector2d(0,1)),
+    SOUTH("Poludnie",new Vector2d(-1,0)),
+    EAST("Wschod",new Vector2d(0,-1)),
+    WEST("Zachod",new Vector2d(1,0));
     private final String directionPol;
-    MapDirection(String directionPol) {
+    private final Vector2d position;
+
+    MapDirection(String directionPol, Vector2d position) {
         this.directionPol = directionPol;
+        this.position = position;
     }
 
     @Override
@@ -32,12 +35,7 @@ public enum MapDirection {
         };
     }
     public Vector2d toUnitVector(){
-        return switch (this){
-            case NORTH -> new Vector2d(0,1);
-            case EAST -> new Vector2d(-1,0);
-            case SOUTH -> new Vector2d(0,-1);
-            case WEST -> new Vector2d(1,0);
-        };
+        return position;
     }
 
 }

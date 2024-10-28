@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MoveDirection;
 
 public class World {
@@ -16,9 +17,12 @@ public class World {
         //System.out.println(String.join(", ",args));
     }
     public static void main(String[] args) {
-        System.out.println("System wystartowal");
-        run(args);
-        System.out.println("System zakonczyl dzialanie");
+
+        Animal animal = new Animal();
+        System.out.println(animal);
+//        System.out.println("System wystartowal");
+//        run(args);
+//        System.out.println("System zakonczyl dzialanie");
 
 //        Vector2d position1 = new Vector2d(1,2);
 //        System.out.println(position1);
