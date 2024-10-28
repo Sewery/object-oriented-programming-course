@@ -9,7 +9,6 @@ class MapDirectionTest {
 
     @Test
     void previous() {
-        //when
         var north = MapDirection.NORTH;
         var south = MapDirection.SOUTH;
         var east = MapDirection.EAST;
@@ -24,7 +23,6 @@ class MapDirectionTest {
 
     @Test
     void next() {
-        //when
         var north = MapDirection.NORTH;
         var south = MapDirection.SOUTH;
         var east = MapDirection.EAST;

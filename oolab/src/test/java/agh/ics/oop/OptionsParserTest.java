@@ -3,6 +3,9 @@ package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,9 +19,9 @@ class OptionsParserTest {
         var moveDirections = OptionsParser.convertToMoveDirections(input);
 
         //then
-        assertEquals(4, moveDirections.length);
-        var expected = new MoveDirection[]{MoveDirection.BACKWARD,MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT};
-        assertArrayEquals(expected, moveDirections);
+        assertEquals(4, moveDirections.size());
+        var expected = List.of(MoveDirection.BACKWARD,MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT);
+        assertEquals(expected, moveDirections);
     }
     @Test
     void invalidInputConvertToMoveDirections() {
@@ -29,9 +32,9 @@ class OptionsParserTest {
         var moveDirections = OptionsParser.convertToMoveDirections(input);
 
         //then
-        assertEquals(4, moveDirections.length);
-        var expected = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT};
-        assertArrayEquals(expected, moveDirections);
+        assertEquals(4, moveDirections.size());
+        var expected = List.of(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT);
+        assertEquals(expected, moveDirections);
     }
     @Test
     void emptyInputConvertToMoveDirections() {
@@ -42,8 +45,8 @@ class OptionsParserTest {
         var moveDirections = OptionsParser.convertToMoveDirections(input);
 
         //then
-        assertEquals(0, moveDirections.length);
-        var expected = new MoveDirection[]{};
-        assertArrayEquals(expected, moveDirections);
+        assertEquals(0, moveDirections.size());
+        var expected = List.of();
+        assertEquals(expected, moveDirections);
     }
 }
