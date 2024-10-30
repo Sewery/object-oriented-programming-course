@@ -44,12 +44,10 @@ class Vector2dTest {
 
     @Test
     void add() {
-        //when
         var v1v2 = v1.add(v2);
         var v2v2 = v2.add(v2);
         var v2v3 = v2.add(v3);
 
-        //then
         assertEquals(new Vector2d(-1, 2), v1v2);
         assertEquals(new Vector2d(-4, 0), v2v2);
         assertEquals(new Vector2d(1, 4), v2v3);
@@ -57,12 +55,10 @@ class Vector2dTest {
 
     @Test
     void subtract() {
-        //when
         var v1v2 = v1.subtract(v2);
         var v2v2 = v2.subtract(v2);
         var v2v3 = v2.subtract(v3);
 
-        //then
         assertEquals(new Vector2d(3, 2), v1v2);
         assertEquals(new Vector2d(0, 0), v2v2);
         assertEquals(new Vector2d(-5, -4), v2v3);
@@ -70,12 +66,10 @@ class Vector2dTest {
 
     @Test
     void upperRight() {
-        //when
         var v1v2 = v1.upperRight(v2);
         var v2v2 = v2.upperRight(v2);
         var v2v3 = v2.upperRight(v3);
 
-        //then
         assertEquals(new Vector2d(1, 2), v1v2);
         assertEquals(new Vector2d(-2, 0), v2v2);
         assertEquals(new Vector2d(3, 4), v2v3);
@@ -83,12 +77,10 @@ class Vector2dTest {
 
     @Test
     void lowerLeft() {
-        //when
         var v1v2 = v1.lowerLeft(v2);
         var v2v2 = v2.lowerLeft(v2);
         var v2v3 = v2.lowerLeft(v3);
 
-        //then
         assertEquals(new Vector2d(-2, 0), v1v2);
         assertEquals(new Vector2d(-2, 0), v2v2);
         assertEquals(new Vector2d(-2, 0), v2v3);
@@ -114,11 +106,9 @@ class Vector2dTest {
     }
     @Test
     void transitiveEquals() {
-        //when
         Vector2d vy = new Vector2d(1, 2);
         Vector2d vz = new Vector2d(1, 2);
 
-        //then
         assertEquals(v1,vy);
         assertEquals(vy,vz);
         assertEquals(v1,vz);

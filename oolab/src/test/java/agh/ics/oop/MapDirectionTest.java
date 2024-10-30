@@ -14,7 +14,6 @@ class MapDirectionTest {
         var east = MapDirection.EAST;
         var west = MapDirection.WEST;
 
-        //then
         assertEquals(MapDirection.WEST, north.previous());
         assertEquals(MapDirection.EAST, south.previous());
         assertEquals(MapDirection.NORTH, east.previous());
@@ -28,7 +27,6 @@ class MapDirectionTest {
         var east = MapDirection.EAST;
         var west = MapDirection.WEST;
 
-        //then
         assertEquals(MapDirection.EAST, north.next());
         assertEquals(MapDirection.WEST, south.next());
         assertEquals(MapDirection.SOUTH, east.next());
