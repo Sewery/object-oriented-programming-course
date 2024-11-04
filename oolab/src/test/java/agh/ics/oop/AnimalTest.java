@@ -79,9 +79,6 @@ public class AnimalTest {
         assertEquals(MapDirection.NORTH, animal2.getOrientation());
     }
     @Test
-    void validMovement() {
-    }
-    @Test
     void forwardMovement() {
         //from north forward
         animal3.move(MoveDirection.FORWARD);

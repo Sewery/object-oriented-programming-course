@@ -5,8 +5,8 @@ public class Animal {
     private MapDirection orientation;
     private Vector2d position;
 
-    private final Vector2d LEFT_LOWER_BORDER = new Vector2d(0,0);
-    private final Vector2d RIGHT_UPPER_BORDER = new Vector2d(4,4);
+    private static final Vector2d LEFT_LOWER_BORDER = new Vector2d(0,0);
+    private static final Vector2d RIGHT_UPPER_BORDER = new Vector2d(4,4);
 
     public Animal(Vector2d position) {
         this.orientation = MapDirection.NORTH;
@@ -24,7 +24,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return orientation.toString() + " " + position.toString();
+        return orientation + " " + position;
     }
 
     public boolean isAt(Vector2d position) {
@@ -41,19 +41,17 @@ public class Animal {
                 break;
             case FORWARD:
             {
-                //System.out.println(position);
-                Vector2d v1 = position.add(orientation.toUnitVector());
-                if( v1.precedes(RIGHT_UPPER_BORDER) && v1.follows(LEFT_LOWER_BORDER)){
-                    position = v1;
-                    //System.out.println(position);
+                Vector2d vec = position.add(orientation.toUnitVector());
+                if( vec.precedes(RIGHT_UPPER_BORDER) && vec.follows(LEFT_LOWER_BORDER)){
+                    position = vec;
                 }
                 break;
             }
             case BACKWARD:
             {
-                Vector2d v1 = position.add(orientation.toUnitVector().opposite());
-                if( v1.precedes(RIGHT_UPPER_BORDER) && v1.follows(LEFT_LOWER_BORDER)){
-                    position = v1;
+                Vector2d vec = position.subtract(orientation.toUnitVector());
+                if( vec.precedes(RIGHT_UPPER_BORDER) && vec.follows(LEFT_LOWER_BORDER)){
+                    position = vec;
                 }
                 break;
             }
@@ -63,4 +61,8 @@ public class Animal {
     public MapDirection getOrientation() {
         return orientation;
     }
+    public Vector2d getPosition() {
+        return position;
+    }
+
 }

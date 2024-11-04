@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
+
     private List<Animal> animals;
-    private List<MoveDirection> movements;
+    private final List<MoveDirection> movements;
 
     public Simulation(List<Vector2d> positions, List<MoveDirection> movements) {
         this.movements = movements;
@@ -19,7 +20,7 @@ public class Simulation {
         }
     }
 
-    void run() {
+    public void run() {
         int indexCurrentAnimal = 0;
         for (var moveDirection : movements) {
             var currentAnimal = animals.get(indexCurrentAnimal);
@@ -28,5 +29,10 @@ public class Simulation {
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
         }
+
     }
+    public List<Animal> getAnimals(){
+        return animals;
+    }
+
 }
