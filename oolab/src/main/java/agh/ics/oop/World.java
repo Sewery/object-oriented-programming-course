@@ -1,6 +1,10 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.Vector2d;
+
+import java.util.List;
 
 public class World {
     private static void run(String[] userInput) {
@@ -16,14 +20,10 @@ public class World {
         //System.out.println(String.join(", ",args));
     }
     public static void main(String[] args) {
-        System.out.println("System wystartowal");
-        run(args);
-        System.out.println("System zakonczyl dzialanie");
 
-//        Vector2d position1 = new Vector2d(1,2);
-//        System.out.println(position1);
-//        Vector2d position2 = new Vector2d(-2,1);
-//        System.out.println(position2);
-//        System.out.println(position1.add(position2));
+        List<MoveDirection> directions = OptionsParser.convertToMoveDirections(args);
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        Simulation simulation = new Simulation(positions, directions);
+        simulation.run();
     }
 }
