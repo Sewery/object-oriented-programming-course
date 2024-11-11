@@ -1,20 +1,16 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
 
     private MapDirection orientation;
-    private Vector2d position;
+    private Vector2d currPosition;
 
-    private static final Vector2d LEFT_LOWER_BORDER = new Vector2d(0,0);
-    private static final Vector2d RIGHT_UPPER_BORDER = new Vector2d(4,4);
-
-    public Animal(Vector2d position) {
+    public Animal(Vector2d currPosition) {
         this.orientation = MapDirection.NORTH;
-        if( position.precedes(RIGHT_UPPER_BORDER) && position.follows(LEFT_LOWER_BORDER)) {
-            this.position = position;
-        }else{
-            throw new IllegalArgumentException("Animal position is invalid");
-        }
+        this.currPosition = currPosition;
+
     }
 
     public Animal() {
@@ -24,14 +20,14 @@ public class Animal {
 
     @Override
     public String toString() {
-        return orientation + " " + position;
+        return orientation.toString();
     }
 
     public boolean isAt(Vector2d position) {
-        return this.position.equals(position);
+        return this.currPosition.equals(position);
     }
 
-    public void move(MoveDirection movement) {
+    public void move(MoveDirection movement, MoveValidator moveValidator) {
         switch (movement) {
             case RIGHT:
                 orientation = orientation.next();
@@ -39,30 +35,41 @@ public class Animal {
             case LEFT:
                 orientation = orientation.previous();
                 break;
-            case FORWARD:
-            {
-                Vector2d vec = position.add(orientation.toUnitVector());
-                if( vec.precedes(RIGHT_UPPER_BORDER) && vec.follows(LEFT_LOWER_BORDER)){
-                    position = vec;
+            case FORWARD: {
+                Vector2d vec = currPosition.add(orientation.toUnitVector());
+                if (moveValidator.canMoveTo(vec)) {
+                    currPosition = vec;
                 }
                 break;
             }
-            case BACKWARD:
-            {
-                Vector2d vec = position.subtract(orientation.toUnitVector());
-                if( vec.precedes(RIGHT_UPPER_BORDER) && vec.follows(LEFT_LOWER_BORDER)){
-                    position = vec;
+            case BACKWARD: {
+                Vector2d vec = currPosition.subtract(orientation.toUnitVector());
+                if (moveValidator.canMoveTo(vec)) {
+                    currPosition = vec;
                 }
                 break;
             }
 
         }
     }
+
     public MapDirection getOrientation() {
         return orientation;
     }
-    public Vector2d getPosition() {
-        return position;
+
+    public Vector2d getCurrPosition() {
+        return currPosition;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return getOrientation() == animal.getOrientation() && Objects.equals(getCurrPosition(), animal.getCurrPosition());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOrientation(), getCurrPosition());
+    }
 }

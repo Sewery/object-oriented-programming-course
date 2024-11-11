@@ -1,38 +1,38 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Simulation {
 
-    private List<Animal> animals;
+    private final List<Animal> animals;
     private final List<MoveDirection> movements;
-
-    public Simulation(List<Vector2d> positions, List<MoveDirection> movements) {
+    private final WorldMap worldMap;
+    public Simulation(List<Vector2d> positions, List<MoveDirection> movements,WorldMap worldMap) {
         this.movements = movements;
+        this.worldMap = worldMap;
         animals = new ArrayList<>();
-        for (var pos : positions) {
-            animals.add(new Animal(pos));
-        }
+        positions.forEach(position -> animals.add(new Animal(position)));
     }
 
     public void run() {
         int indexCurrentAnimal = 0;
+        System.out.println(worldMap);
         for (var moveDirection : movements) {
             var currentAnimal = animals.get(indexCurrentAnimal);
-            currentAnimal.move(moveDirection);
-            System.out.println("Zwierze %d : %s".formatted(indexCurrentAnimal, currentAnimal));
+            worldMap.move(currentAnimal,moveDirection);
+            //System.out.printf("Zwierze %d : %s%n", indexCurrentAnimal, currentAnimal);
+            System.out.println(worldMap);
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
         }
 
     }
-    public List<Animal> getAnimals(){
-        return animals;
+    List<Animal> getAnimals(){
+        return Collections.unmodifiableList(animals);
     }
 
 }
