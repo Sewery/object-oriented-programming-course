@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.Objects;
 
-public class Animal {
+public class Animal{
 
     private MapDirection orientation;
     private Vector2d currPosition;

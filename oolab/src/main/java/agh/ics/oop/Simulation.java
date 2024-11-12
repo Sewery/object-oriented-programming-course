@@ -1,38 +1,37 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.*;
+import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.WorldMap;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Simulation {
+public class Simulation<T,P> {
 
-    private final List<Animal> animals;
+    private final List<T> entities;
     private final List<MoveDirection> movements;
-    private final WorldMap worldMap;
-    public Simulation(List<Vector2d> positions, List<MoveDirection> movements,WorldMap worldMap) {
+    private final WorldMap<T,P> worldMap;
+    public Simulation( List<MoveDirection> movements,WorldMap<T,P> worldMap, List<T> entities ) {
         this.movements = movements;
         this.worldMap = worldMap;
-        animals = new ArrayList<>();
-        positions.forEach(position -> animals.add(new Animal(position)));
+        this.entities = entities;
     }
 
     public void run() {
-        int indexCurrentAnimal = 0;
+        int indexCurrentEntity = 0;
         System.out.println(worldMap);
         for (var moveDirection : movements) {
-            var currentAnimal = animals.get(indexCurrentAnimal);
-            worldMap.move(currentAnimal,moveDirection);
-            //System.out.printf("Zwierze %d : %s%n", indexCurrentAnimal, currentAnimal);
+            var currentEntity = entities.get(indexCurrentEntity);
+            worldMap.move(currentEntity,moveDirection);
+            //System.out.printf("Zwierze %d : %s%n", indexCurrentEntity, currentEntity);
             System.out.println(worldMap);
-            indexCurrentAnimal++;
-            indexCurrentAnimal %= animals.size();
+            indexCurrentEntity++;
+            indexCurrentEntity %= entities.size();
         }
 
     }
-    List<Animal> getAnimals(){
-        return Collections.unmodifiableList(animals);
+    List<T> getEntities(){
+        return Collections.unmodifiableList(entities);
     }
 
 }

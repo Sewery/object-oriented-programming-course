@@ -3,8 +3,8 @@ package agh.ics.oop.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RectangularMap implements WorldMap {
-    private final Map<Vector2d,Animal> vector2dAnimalMap = new HashMap<>();
+public class RectangularMap implements WorldMap<Animal,Vector2d> {
+    private final Map<Vector2d,Animal> vector2dAnimalMap;
     private final int width;
     private final int height;
     private final Vector2d leftLowerCorner;
@@ -15,6 +15,7 @@ public class RectangularMap implements WorldMap {
         this.height = height;
         this.leftLowerCorner = new Vector2d(0, 0);
         this.rightUpperCorner = new Vector2d(width, height);
+        this.vector2dAnimalMap = new HashMap<>();
         this.mapVisualizer = new MapVisualizer(this);
     }
 
@@ -33,6 +34,7 @@ public class RectangularMap implements WorldMap {
                         }
                     });
         }
+        //When this animal was placed
         if(canMoveTo(animal.getCurrPosition())){
             vector2dAnimalMap.put(animal.getCurrPosition(), animal);
             return true;

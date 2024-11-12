@@ -10,7 +10,7 @@ public class AnimalTest {
     private Animal animal2;
     private Animal animal3;
     private Animal animal4;
-    private MoveValidator moveValidator;
+    private MoveValidator<Vector2d> moveValidator;
     @BeforeEach
     void setUp() {
         animal1 = new Animal();
