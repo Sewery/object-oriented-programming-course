@@ -36,16 +36,16 @@ public class Animal {
                 orientation = orientation.previous();
                 break;
             case FORWARD: {
-                Vector2d vec = currPosition.add(orientation.toUnitVector());
-                if (moveValidator.canMoveTo(vec)) {
-                    currPosition = vec;
+                Vector2d supposedPosition = currPosition.add(orientation.toUnitVector());
+                if (moveValidator.canMoveTo(supposedPosition)) {
+                    currPosition = supposedPosition;
                 }
                 break;
             }
             case BACKWARD: {
-                Vector2d vec = currPosition.subtract(orientation.toUnitVector());
-                if (moveValidator.canMoveTo(vec)) {
-                    currPosition = vec;
+                Vector2d supposedPosition = currPosition.subtract(orientation.toUnitVector());
+                if (moveValidator.canMoveTo(supposedPosition)) {
+                    currPosition = supposedPosition;
                 }
                 break;
             }

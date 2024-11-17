@@ -14,8 +14,11 @@ public class Simulation {
     public Simulation(List<Vector2d> positions, List<MoveDirection> movements,WorldMap worldMap) {
         this.movements = movements;
         this.worldMap = worldMap;
-        animals = new ArrayList<>();
-        positions.forEach(position -> animals.add(new Animal(position)));
+        this.animals = new ArrayList<>();
+        positions.forEach(position -> {
+            animals.add(new Animal(position));
+            worldMap.place(new Animal(position));
+        });
     }
 
     public void run() {

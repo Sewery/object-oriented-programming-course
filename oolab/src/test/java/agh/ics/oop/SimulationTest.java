@@ -32,11 +32,11 @@ public class SimulationTest {
         List<Animal> animals = simulation.getAnimals();
 
         // Check final positions and orientations
-        assertEquals(new Vector2d(2, 4), animals.get(0).getCurrPosition());
+        assertEquals(new Vector2d(2, 3), animals.get(0).getCurrPosition());
         assertEquals("N", animals.get(0).getOrientation().toString());
 
 
-        assertEquals(new Vector2d(4, 3), animals.get(1).getCurrPosition());
+        assertEquals(new Vector2d(3, 3), animals.get(1).getCurrPosition());
         assertEquals("E", animals.get(1).getOrientation().toString());
     }
 
