@@ -2,14 +2,14 @@ package agh.ics.oop.model;
 
 import java.util.Objects;
 
-public class Animal {
+public class Animal implements WorldElement{
 
     private MapDirection orientation;
-    private Vector2d currPosition;
+    private Vector2d position;
 
-    public Animal(Vector2d currPosition) {
+    public Animal(Vector2d position) {
         this.orientation = MapDirection.NORTH;
-        this.currPosition = currPosition;
+        this.position = position;
 
     }
 
@@ -24,7 +24,7 @@ public class Animal {
     }
 
     public boolean isAt(Vector2d position) {
-        return this.currPosition.equals(position);
+        return this.position.equals(position);
     }
 
     public void move(MoveDirection movement, MoveValidator moveValidator) {
@@ -36,16 +36,16 @@ public class Animal {
                 orientation = orientation.previous();
                 break;
             case FORWARD: {
-                Vector2d supposedPosition = currPosition.add(orientation.toUnitVector());
+                Vector2d supposedPosition = position.add(orientation.toUnitVector());
                 if (moveValidator.canMoveTo(supposedPosition)) {
-                    currPosition = supposedPosition;
+                    position = supposedPosition;
                 }
                 break;
             }
             case BACKWARD: {
-                Vector2d supposedPosition = currPosition.subtract(orientation.toUnitVector());
+                Vector2d supposedPosition = position.subtract(orientation.toUnitVector());
                 if (moveValidator.canMoveTo(supposedPosition)) {
-                    currPosition = supposedPosition;
+                    position = supposedPosition;
                 }
                 break;
             }
@@ -57,19 +57,20 @@ public class Animal {
         return orientation;
     }
 
-    public Vector2d getCurrPosition() {
-        return currPosition;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Animal animal = (Animal) o;
-        return getOrientation() == animal.getOrientation() && Objects.equals(getCurrPosition(), animal.getCurrPosition());
+        return getOrientation() == animal.getOrientation() && Objects.equals(getPosition(), animal.getPosition());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrientation(), getCurrPosition());
+        return Objects.hash(getOrientation(), getPosition());
+    }
+
+    @Override
+    public Vector2d getPosition() {
+        return position;
     }
 }

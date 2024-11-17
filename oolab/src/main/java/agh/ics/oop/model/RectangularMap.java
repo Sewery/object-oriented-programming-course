@@ -17,8 +17,8 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public boolean place(Animal animal) {
-        if(canMoveTo(animal.getCurrPosition())){
-            vector2dAnimalMap.put(animal.getCurrPosition(), animal);
+        if(canMoveTo(animal.getPosition())){
+            vector2dAnimalMap.put(animal.getPosition(), animal);
             return true;
         }
         return false;
@@ -26,11 +26,11 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public void move(Animal animal, MoveDirection direction) {
-        var originalPosition = animal.getCurrPosition();
+        var originalPosition = animal.getPosition();
         animal.move(direction,this);
-        if(!originalPosition.equals(animal.getCurrPosition())){
+        if(!originalPosition.equals(animal.getPosition())){
             vector2dAnimalMap.remove(originalPosition);
-            vector2dAnimalMap.put(animal.getCurrPosition(), animal);
+            vector2dAnimalMap.put(animal.getPosition(), animal);
         }
     }
 
@@ -46,7 +46,9 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return !isOccupied(position) && position.precedes(rightUpperCorner) && position.follows(leftLowerCorner);
+        return !isOccupied(position)
+                && position.precedes(rightUpperCorner)
+                && position.follows(leftLowerCorner);
     }
 
     @Override
