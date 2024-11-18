@@ -18,12 +18,12 @@ public class World {
         //System.out.println(String.join(", ",args));
     }
     public static void main(String[] args) {
-
-        List<MoveDirection> directions = OptionsParser.convertToMoveDirections(args);
+        String[] arg = {"f", "f", "f", "l", "r", "f"};
+        List<MoveDirection> directions = OptionsParser.convertToMoveDirections(arg);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        GrassField grassField = new GrassField(10);
+        AbstractWorldMap grassField = new GrassField(10);
         Simulation simulation = new Simulation(positions, directions,grassField);
         simulation.run();
-        System.out.println(RandomVector2dGenerator.generateUniqueList(10));
+        System.out.println(RandomPositionsGenerator.generateUniqueList(13,(int)Math.sqrt(10*10)));
     }
 }
