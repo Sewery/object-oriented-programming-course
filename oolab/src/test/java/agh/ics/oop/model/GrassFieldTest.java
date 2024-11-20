@@ -27,7 +27,7 @@ class GrassFieldTest {
     }
     @Test
     public void grassPlacement(){
-        var grassPositions = RandomPositionsGenerator.generateUniqueList(10,(int)Math.sqrt(10*10));
+        var grassPositions = RandomPositionsGenerator.generateUniqueSet(10,(int)Math.sqrt(10*10));
         Set<Vector2d> grassElementsPositions = grassField.getElements().stream()
                 .filter(worldElement -> worldElement.toString().equals("*")) //Searching for grass elements by string
                 .map(worldElement -> ((Grass)worldElement).getPosition())//Extracting their positions

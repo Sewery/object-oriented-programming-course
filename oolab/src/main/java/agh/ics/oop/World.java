@@ -24,6 +24,6 @@ public class World {
         AbstractWorldMap grassField = new GrassField(10);
         Simulation simulation = new Simulation(positions, directions,grassField);
         simulation.run();
-        System.out.println(RandomPositionsGenerator.generateUniqueList(13,(int)Math.sqrt(10*10)));
+        System.out.println(RandomPositionsGenerator.generateUniqueSet(13,(int)Math.sqrt(10*10)));
     }
 }

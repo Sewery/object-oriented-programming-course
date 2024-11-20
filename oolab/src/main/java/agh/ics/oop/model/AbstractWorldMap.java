@@ -6,9 +6,7 @@ import java.util.List;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected final HashMap<Vector2d,Animal> animalHashMap;
-    protected Vector2d upperRightBorder;
-    protected Vector2d lowerLeftBorder;
-    private final MapVisualizer mapVisualizer;
+    protected final MapVisualizer mapVisualizer;
     public AbstractWorldMap() {
         this.animalHashMap = new HashMap<>();
         this.mapVisualizer = new MapVisualizer(this);
@@ -31,11 +29,19 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
     }
     @Override
-    public String toString() {
-        return mapVisualizer.draw(lowerLeftBorder, upperRightBorder);
+    public WorldElement objectAt(Vector2d position) {
+        return animalHashMap.get(position);
+    }
+    @Override
+    public boolean isOccupied(Vector2d position) {
+        return animalHashMap.containsKey(position);
     }
     @Override
     public List<WorldElement> getElements() {
         return new ArrayList<>(animalHashMap.values());
+    }
+    @Override
+    public boolean canMoveTo(Vector2d position) {
+        return !isOccupied(position);
     }
 }
