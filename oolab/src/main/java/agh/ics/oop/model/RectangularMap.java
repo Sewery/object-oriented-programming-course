@@ -19,4 +19,8 @@ public class RectangularMap extends AbstractWorldMap implements WorldMap {
                 && position.follows(lowerLeftBorder);
     }
 
+    @Override
+    public String toString() {
+        return mapVisualizer.draw(lowerLeftBorder, upperRightBorder);
+    }
 }
