@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
     @Test
@@ -25,16 +24,8 @@ class OptionsParserTest {
     }
     @Test
     void invalidInputConvertToMoveDirections() {
-        //given
         String[] input = {"f", "b", "l", "", "dre.fwwd","r"};
-
-        //when
-        var moveDirections = OptionsParser.convertToMoveDirections(input);
-
-        //then
-        assertEquals(4, moveDirections.size());
-        var expected = List.of(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT);
-        assertEquals(expected, moveDirections);
+        assertThrows(IllegalArgumentException.class, ()->OptionsParser.convertToMoveDirections(input));
     }
     @Test
     void emptyInputConvertToMoveDirections() {

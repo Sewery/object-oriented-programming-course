@@ -12,12 +12,12 @@ public abstract class AbstractWorldMap implements WorldMap {
         this.mapVisualizer = new MapVisualizer(this);
     }
     @Override
-    public boolean place(Animal animal) {
+    public void place(Animal animal) throws IncorrectPositionException{
         if(canMoveTo(animal.getPosition())){
             animalHashMap.put(animal.getPosition(), animal);
-            return true;
+            return;
         }
-        return false;
+        throw new IncorrectPositionException(animal.getPosition());
     }
     @Override
     public void move(Animal animal, MoveDirection direction) {

@@ -6,14 +6,20 @@ import java.util.List;
 
 public class World {
     private static void run(String[] userInput) {
-        var moveDirections= OptionsParser.convertToMoveDirections(userInput);
-        for (var move : moveDirections) {
-            switch(move){
-                case FORWARD-> System.out.println("Zwierzak idzie do przodu");
-                case BACKWARD-> System.out.println("Zwierzak idzie do tylu");
-                case RIGHT-> System.out.println("Zwierzak skreca w prawo");
-                case LEFT-> System.out.println("Zwierzak skreca w lewo");
-            };
+        try {
+
+            var moveDirections = OptionsParser.convertToMoveDirections(userInput);
+            for (var move : moveDirections) {
+                switch (move) {
+                    case FORWARD -> System.out.println("Zwierzak idzie do przodu");
+                    case BACKWARD -> System.out.println("Zwierzak idzie do tylu");
+                    case RIGHT -> System.out.println("Zwierzak skreca w prawo");
+                    case LEFT -> System.out.println("Zwierzak skreca w lewo");
+                }
+                ;
+            }
+        }catch(IllegalArgumentException e) {
+            System.err.println(e.getLocalizedMessage());
         }
         //System.out.println(String.join(", ",args));
     }
