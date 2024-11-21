@@ -28,8 +28,9 @@ public class World {
         List<MoveDirection> directions = OptionsParser.convertToMoveDirections(arg);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         AbstractWorldMap grassField = new GrassField(10);
+        //Adding subscriber
+        grassField.subscribeMapChangeListener(new ConsoleMapDisplay());
         Simulation simulation = new Simulation(positions, directions,grassField);
         simulation.run();
-        System.out.println(RandomPositionsGenerator.generateUniqueSet(13,(int)Math.sqrt(10*10)));
     }
 }

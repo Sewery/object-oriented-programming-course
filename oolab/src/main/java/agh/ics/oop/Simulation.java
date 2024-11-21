@@ -31,8 +31,6 @@ public class Simulation {
         for (var moveDirection : movements) {
             var currentAnimal = animals.get(indexCurrentAnimal);
             worldMap.move(currentAnimal,moveDirection);
-            //System.out.printf("Zwierze %d : %s%n", indexCurrentAnimal, currentAnimal);
-            System.out.println(worldMap);
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
         }

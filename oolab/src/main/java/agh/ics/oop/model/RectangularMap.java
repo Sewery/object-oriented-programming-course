@@ -1,26 +1,23 @@
 package agh.ics.oop.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class RectangularMap extends AbstractWorldMap implements WorldMap {
-    private final Map<Vector2d,Animal> animalHashMap = new HashMap<>();
-    private final Vector2d lowerLeftBorder;
-    private final Vector2d upperRightBorder;
+    private final Boundary boundary;
     public RectangularMap(int width, int height) {
-        lowerLeftBorder = new Vector2d(0, 0);
-        upperRightBorder = new Vector2d(width-1, height-1);
+        Vector2d lowerLeftBorder = new Vector2d(0, 0);
+        Vector2d upperRightBorder = new Vector2d(width-1, height-1);
+        this.boundary = new Boundary(lowerLeftBorder, upperRightBorder);
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        return boundary;
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
         return !isOccupied(position)
-                && position.precedes(upperRightBorder)
-                && position.follows(lowerLeftBorder);
+                && position.precedes(boundary.rightUpperCorner())
+                && position.follows(boundary.leftLowerCorner());
     }
 
-    @Override
-    public String toString() {
-        return mapVisualizer.draw(lowerLeftBorder, upperRightBorder);
-    }
 }

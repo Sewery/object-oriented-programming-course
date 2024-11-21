@@ -33,6 +33,23 @@ public class GrassField extends AbstractWorldMap implements WorldMap{
     }
 
     @Override
+    public Boundary getCurrentBounds() {
+        int tempMaxX = upperRightBorder.getX();
+        int tempMaxY = upperRightBorder.getY();
+        int tempMinX = lowerLeftBorder.getX();
+        int tempMinY = lowerLeftBorder.getY();
+        for(var elem:animalHashMap.values()){
+            tempMaxX= Math.max(tempMaxX,elem.getPosition().getX());
+            tempMaxY= Math.max(tempMaxY,elem.getPosition().getY());
+            tempMinX= Math.min(tempMinX,elem.getPosition().getX());
+            tempMinY= Math.min(tempMinY,elem.getPosition().getY());
+        }
+        this.upperRightBorder = new Vector2d(tempMaxX,tempMaxY);
+        this.lowerLeftBorder = new Vector2d(tempMinX,tempMinY);
+        return new Boundary(lowerLeftBorder,upperRightBorder);
+    }
+
+    @Override
     public WorldElement objectAt(Vector2d position) {
         if(super.animalHashMap.containsKey(position)){
             return super.objectAt(position);
@@ -49,21 +66,5 @@ public class GrassField extends AbstractWorldMap implements WorldMap{
         var elements = super.getElements();
         elements.addAll(grassHashMap.values());
         return elements;
-    }
-    @Override
-    public String toString() {
-        int tempMaxX = upperRightBorder.getX();
-        int tempMaxY = upperRightBorder.getY();
-        int tempMinX = lowerLeftBorder.getX();
-        int tempMinY = lowerLeftBorder.getY();
-        for(var elem:animalHashMap.values()){
-            tempMaxX= Math.max(tempMaxX,elem.getPosition().getX());
-            tempMaxY= Math.max(tempMaxY,elem.getPosition().getY());
-            tempMinX= Math.min(tempMinX,elem.getPosition().getX());
-            tempMinY= Math.min(tempMinY,elem.getPosition().getY());
-        }
-        this.upperRightBorder = new Vector2d(tempMaxX,tempMaxY);
-        this.lowerLeftBorder = new Vector2d(tempMinX,tempMinY);
-        return mapVisualizer.draw(lowerLeftBorder,upperRightBorder);
     }
 }
