@@ -16,8 +16,12 @@ public class Simulation {
         this.worldMap = worldMap;
         this.animals = new ArrayList<>();
         positions.forEach(position -> {
-            animals.add(new Animal(position));
-            worldMap.place(new Animal(position));
+            try {
+                animals.add(new Animal(position));
+                worldMap.place(animals.getLast());
+            } catch (IncorrectPositionException e) {
+                System.err.println(e.getLocalizedMessage());
+            }
         });
     }
 
@@ -27,8 +31,6 @@ public class Simulation {
         for (var moveDirection : movements) {
             var currentAnimal = animals.get(indexCurrentAnimal);
             worldMap.move(currentAnimal,moveDirection);
-            //System.out.printf("Zwierze %d : %s%n", indexCurrentAnimal, currentAnimal);
-            System.out.println(worldMap);
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
         }
