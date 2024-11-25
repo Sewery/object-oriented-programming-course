@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
+
 public class RectangularMap extends AbstractWorldMap implements WorldMap {
     private final Boundary boundary;
     public RectangularMap(int width, int height) {

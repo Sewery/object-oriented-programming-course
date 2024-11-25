@@ -16,9 +16,9 @@ public class Simulation {
         this.worldMap = worldMap;
         this.animals = new ArrayList<>();
         positions.forEach(position -> {
-            animals.add(new Animal(position));
             try {
-                worldMap.place(new Animal(position));
+                animals.add(new Animal(position));
+                worldMap.place(animals.getLast());
             } catch (IncorrectPositionException e) {
                 System.err.println(e.getLocalizedMessage());
             }
