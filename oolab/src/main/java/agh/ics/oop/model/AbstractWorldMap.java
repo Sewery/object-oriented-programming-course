@@ -6,15 +6,18 @@ import agh.ics.oop.model.util.MapVisualizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected List<MapChangeListener> mapChangeListeners;
     protected final HashMap<Vector2d,Animal> animalHashMap;
     protected final MapVisualizer mapVisualizer;
+    private final UUID mapId;
     public AbstractWorldMap() {
         this.animalHashMap = new HashMap<>();
         this.mapVisualizer = new MapVisualizer(this);
         this.mapChangeListeners = new ArrayList<>();
+        this.mapId = UUID.randomUUID();
     }
     public abstract Boundary getCurrentBounds();
     @Override
@@ -56,6 +59,10 @@ public abstract class AbstractWorldMap implements WorldMap {
     public String toString() {
         Boundary currentBounds = getCurrentBounds();
         return mapVisualizer.draw(currentBounds.leftLowerCorner(),currentBounds.rightUpperCorner());
+    }
+    @Override
+    public UUID getId(){
+        return mapId;
     }
     public void subscribeMapChangeListener(MapChangeListener listener) {
         mapChangeListeners.add(listener);

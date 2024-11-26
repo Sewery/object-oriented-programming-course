@@ -11,6 +11,7 @@ public class ConsoleMapDisplay implements MapChangeListener {
         System.out.println("-----------------");
         System.out.println(message);
         System.out.println(worldMap.toString());
+        System.out.println("Map id: "+worldMap.getId());
         System.out.println("Number of changes: " + mapChangedCount);
         mapChangedCount++;
     }
