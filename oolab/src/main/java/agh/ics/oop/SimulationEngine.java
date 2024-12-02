@@ -24,23 +24,24 @@ public class SimulationEngine {
             threads.add(thread);
             thread.start();
         });
-        awaitSimulationsEnd();
+        //awaitSimulationsEnd();
     }
     public void runAsyncInThreadPool(){
         simulations.forEach(simulation ->
             executorService.submit(simulation::run)
         );
         executorService.shutdown();
-        awaitSimulationsEnd();
+        try{
+            awaitSimulationsEnd();
+        }catch(InterruptedException e){
+            System.err.println(e.getMessage());
+        }
+
     }
-    public void awaitSimulationsEnd() {
-        threads.forEach(thread -> {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
-        });
+    public void awaitSimulationsEnd() throws InterruptedException {
+        for(var thread : threads){
+            thread.join();
+        }
         try {
             if(!executorService.awaitTermination(10, TimeUnit.SECONDS)){
                 executorService.shutdownNow();
