@@ -11,15 +11,13 @@ import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.List;
 
 public class SimulationPresenter implements MapChangeListener {
+
     private WorldMap worldMap;
     @FXML
     public GridPane mapGrid;
@@ -30,9 +28,7 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private Label movementDescriptionLabel;
     @FXML
-    private Label infoLabel;
-    @FXML
-    private HBox basicHBox;
+    public VBox basicVBox;
     private final Integer maxSizeOfMap = 400;
 
     public void setWorldMap(WorldMap worldMap) {
@@ -40,21 +36,17 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void drawMap() {
-//        clearGrid();
-//        var bounds = worldMap.getCurrentBounds();
-//        var boundsSubtracted = bounds.rightUpperCorner().subtract(bounds.leftLowerCorner());
-//        int minX = bounds.leftLowerCorner().getX();
-//        int minY = bounds.leftLowerCorner().getY();
-//        int maxX = bounds.rightUpperCorner().getX();
-//        int maxY = bounds.rightUpperCorner().getY();
-//        int columns = boundsSubtracted.getX();
-//        int rows = boundsSubtracted.getY();
-//        int cellWidth = maxSizeOfMap / boundsSubtracted.getX();
-//        int cellHeight = maxSizeOfMap / boundsSubtracted.getY();
-//        createGrid(minX, minY, columns, rows, cellWidth, cellHeight);
-//        addElementsToGrid(minX, minY, columns, rows);
-
-
+        clearGrid();
+        var bounds = worldMap.getCurrentBounds();
+        var boundsSubtracted = bounds.rightUpperCorner().subtract(bounds.leftLowerCorner());
+        int minX = bounds.leftLowerCorner().getX();
+        int minY = bounds.leftLowerCorner().getY()-1;
+        int columns = boundsSubtracted.getX()+1;
+        int rows = boundsSubtracted.getY()+1;
+        int cellWidth = maxSizeOfMap / boundsSubtracted.getX();
+        int cellHeight = maxSizeOfMap / boundsSubtracted.getY();
+        createGrid(minX, minY, columns, rows, cellWidth, cellHeight);
+        addElementsToGrid(minX, minY, columns, rows);
     }
 
     private void createGrid(int minX, int minY, int columns, int rows, int cellWidth, int cellHeight) {
@@ -74,7 +66,7 @@ public class SimulationPresenter implements MapChangeListener {
             mapGrid.getRowConstraints().add(new RowConstraints(cellHeight));
             mapGrid.add(label, 0, i + 1);
         }
-        //x/y label
+        //y/x label
         var label = new Label("y/x");
         GridPane.setHalignment(label, HPos.CENTER);
         mapGrid.add(label, 0, 0);
@@ -98,10 +90,9 @@ public class SimulationPresenter implements MapChangeListener {
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
         setWorldMap(worldMap);
+//        infoLabel.setText(worldMap.toString());
         Platform.runLater(() -> {
             drawMap();
-            //infoLabel.setText(worldMap.toString());
-            startButton.setText("Start simulation");
             movementDescriptionLabel.setText(message);
             GridPane.setHalignment(listOfMovesTextFiled, HPos.CENTER);
             GridPane.setHalignment(startButton, HPos.CENTER);
@@ -120,7 +111,7 @@ public class SimulationPresenter implements MapChangeListener {
 
         var simulation = new Simulation(positions, directions, map);
         var simulationEngine = new SimulationEngine(List.of(simulation));
-        simulationEngine.runSync();
+        simulationEngine.runAsync();
     }
 
     private void clearGrid() {
@@ -128,9 +119,5 @@ public class SimulationPresenter implements MapChangeListener {
         mapGrid.getColumnConstraints().clear();
         mapGrid.getRowConstraints().clear();
     }
-    @FXML
-    private void newGame(){
-        SimulationApp simulationApp = new SimulationApp();
-        simulationApp.start(new Stage());
-    }
+
 }

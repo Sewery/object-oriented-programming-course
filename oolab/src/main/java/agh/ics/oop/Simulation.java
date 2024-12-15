@@ -33,12 +33,12 @@ public class Simulation {
             worldMap.move(currentAnimal,moveDirection);
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
-//            try {
-//                Thread.sleep(500);
-//            }catch(InterruptedException e){
-//                System.err.println(e.getLocalizedMessage());
-//                break;
-//            }
+            try {
+                Thread.sleep(500);
+            }catch(InterruptedException e){
+                System.err.println(e.getLocalizedMessage());
+                break;
+            }
         }
 
     }

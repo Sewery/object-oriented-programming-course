@@ -26,7 +26,6 @@ public class World {
     }
 
     public static void main(String[] args) {
-
         String[] arg = {"f", "f", "f", "l", "r", "f", "r", "l", "b", "r", "f"};
         List<MoveDirection> directions = OptionsParser.convertToMoveDirections(arg);
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(8, 10));
@@ -47,4 +46,5 @@ public class World {
         System.out.println("System zakonczyl dzialanie");
 
     }
+
 }
