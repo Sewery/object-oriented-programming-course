@@ -19,6 +19,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         this.mapChangeListeners = new ArrayList<>();
         this.mapId = UUID.randomUUID();
     }
+    @Override
     public abstract Boundary getCurrentBounds();
     @Override
     public void place(Animal animal) throws IncorrectPositionException{

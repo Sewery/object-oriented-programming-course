@@ -2,11 +2,21 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="550.0" minWidth="850.0"
             fx:controller="agh.ics.oop.presenter.SimulationPresenter">
-    <center>
+    <top>
         <Label fx:id="infoLabel" text="All animals will be living here!" textAlignment="CENTER"/>
+        <TextField fx:id="listOfMovesTextFiled"  promptText="Enter moves"/>
+        <Button fx:id="startButton" onAction="#onSimulationStartClicked" />
+        <Label fx:id="movementDescriptionLabel" textAlignment="CENTER"/>
+    </top>
+    <center>
+            <GridPane fx:id="mapGrid" alignment="CENTER" gridLinesVisible="true"/>
     </center>
 </BorderPane>

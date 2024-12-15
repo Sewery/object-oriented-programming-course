@@ -25,7 +25,7 @@ public class Simulation {
         });
     }
 
-    public void run() {
+    public void run(){
         int indexCurrentAnimal = 0;
         System.out.println(worldMap);
         for (var moveDirection : movements) {
@@ -33,6 +33,12 @@ public class Simulation {
             worldMap.move(currentAnimal,moveDirection);
             indexCurrentAnimal++;
             indexCurrentAnimal %= animals.size();
+//            try {
+//                Thread.sleep(500);
+//            }catch(InterruptedException e){
+//                System.err.println(e.getLocalizedMessage());
+//                break;
+//            }
         }
 
     }

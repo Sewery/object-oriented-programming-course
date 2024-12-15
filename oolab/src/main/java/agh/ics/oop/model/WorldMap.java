@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +36,7 @@ public interface WorldMap extends MoveValidator {
      * @return True if the position is occupied.
      */
     boolean isOccupied(Vector2d position);
+    Boundary getCurrentBounds();
 
     /**
      * Return an animal at a given position.
