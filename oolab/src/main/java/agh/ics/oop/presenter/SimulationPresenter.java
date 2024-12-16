@@ -20,7 +20,7 @@ public class SimulationPresenter implements MapChangeListener {
 
     private WorldMap worldMap;
     @FXML
-    public GridPane mapGrid;
+    private GridPane mapGrid;
     @FXML
     private TextField listOfMovesTextFiled;
     @FXML
@@ -28,7 +28,7 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private Label movementDescriptionLabel;
     @FXML
-    public VBox basicVBox;
+    private VBox basicVBox;
     private final Integer maxSizeOfMap = 400;
 
     public void setWorldMap(WorldMap worldMap) {
@@ -90,13 +90,11 @@ public class SimulationPresenter implements MapChangeListener {
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
         setWorldMap(worldMap);
-//        infoLabel.setText(worldMap.toString());
+        GridPane.setHalignment(listOfMovesTextFiled, HPos.CENTER);
+        GridPane.setHalignment(startButton, HPos.CENTER);
         Platform.runLater(() -> {
             drawMap();
             movementDescriptionLabel.setText(message);
-            GridPane.setHalignment(listOfMovesTextFiled, HPos.CENTER);
-            GridPane.setHalignment(startButton, HPos.CENTER);
-            // GridPane.setHalignment(infoLabel, HPos.CENTER);
         });
     }
 
