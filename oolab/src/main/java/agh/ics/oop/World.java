@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.ConsoleMapDisplay;
+import javafx.application.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.List;
 public class World {
     private static void run(String[] userInput) {
         try {
-
             var moveDirections = OptionsParser.convertToMoveDirections(userInput);
             for (var move : moveDirections) {
                 switch (move) {
@@ -41,9 +41,10 @@ public class World {
         }
         var simulationEngine = new SimulationEngine(simulations);
         //simulationEngine.runSync();
-        //simulationEngine.runAsync();
-        simulationEngine.runAsyncInThreadPool();
+        simulationEngine.runAsync();
+        //simulationEngine.runAsyncInThreadPool();
         System.out.println("System zakonczyl dzialanie");
 
     }
+
 }
